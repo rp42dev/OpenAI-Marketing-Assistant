@@ -34,6 +34,7 @@ def _print_self_name(func):
         return func(self, *args, **kwargs)
     return wrapper
 
+
 class OpenAIClient:
     """Client for interacting with OpenAI's GPT API for chat-based responses."""
     def __init__(self):
@@ -68,9 +69,9 @@ class OpenAIClient:
         return result
     
     @_handle_api_exceptions
-    def create_run(self, thread_id, assistant_id):
+    def create_run(self, thread_id, assistant_id, task_instructions):
         """Create a new message in the thread with the assistant agent."""
-        message = self.client.beta.threads.runs.create(thread_id=thread_id, assistant_id=assistant_id)
+        message = self.client.beta.threads.runs.create(thread_id=thread_id, assistant_id=assistant_id, instructions=task_instructions)
         return message
     
     @_handle_api_exceptions
@@ -123,30 +124,53 @@ def main():
         for task_num in client.config["tasks"]:
             print(f"{task_num}: {client.config['tasks'][task_num]['name']}")
         
-        # Get user input
-        user_input = input("Please select a task number or 'q' to quit: ").strip()
+        print("Type 'q' to quit.")
         
-        # Check if the user wants to quit
-        if user_input.lower() == 'q':
+        # Get user niche input and check for 'q' in one line
+        if (user_input_niche := input("Please type in your niche: ").strip().lower()) == 'q':
+            client.delete_thread(thread.id)
+            print("Session ended. Goodbye!")
+            break
+        
+        # Get user title input and check for 'q' in one line
+        if (user_input_title := input("Please type in your title: ").strip().lower()) == 'q':
+            client.delete_thread(thread.id)
+            print("Session ended. Goodbye!")
+            break
+        
+        # Get user description input and check for 'q' in one line
+        if (user_input_description := input("Please type in your description: ").strip().lower()) == 'q':
+            client.delete_thread(thread.id)
+            print("Session ended. Goodbye!")
+            break
+        
+        # Get user task input and check for 'q'
+        if (user_input_task := input("Please select a task number: ").strip().lower()) == 'q':
             client.delete_thread(thread.id)
             print("Session ended. Goodbye!")
             break
         
         # Validate the task number
-        if user_input not in client.config["tasks"]:
+        if user_input_task not in client.config["tasks"]:
             print("Invalid task number. Please try again.")
             continue
         
         # Process the valid task
-        task = user_input
-        task_content = client.config['tasks'][task]['content']
+        niche = f"Niche: {user_input_niche}"
+        title = f"title: {user_input_title}"
+        description = f"description: {user_input_description}"
+        
+      
+        user_input = f"{niche}\n{title}\n{description}"
+        task = user_input_task
+        task_instructions = client.config['tasks'][task]['instructions']
         task_role = client.config['tasks'][task]['role']
         
         print(f"Selected Task: {client.config['tasks'][task]['name']}")
-        print(task_content)
+        print(task_instructions)
         
-        message = client.create_message(thread.id, task_content, task_role)
-        run = client.create_run(thread.id, client.get_assistant().id)
+        message = client.create_message(thread.id, user_input, task_role)
+        run = client.create_run(thread.id, client.get_assistant().id, task_instructions)
         
         run = client.wait_on_run(run, thread.id)
         response = client.retrieve_message(thread.id, message.id)
