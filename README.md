@@ -14,6 +14,29 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
 2. Set up your OpenAI API key and other environment variables.
 3. Run `main.py` to start the OpenAI Marketing Assistant toolkit.
 
+## Configuration file example
+
+```json
+{
+    "tasks": {
+        "1": {
+            "name": "find a ideal customer",
+            "instructions": "based on user input, find a ideal customer for the user in niche market. (keep it short and simple)",
+            "role": "user"
+        },
+        "2": {
+            "name": "name goes here",
+            "instructions": "instructions goes here",
+            "role": "user"
+        },
+        "3": {
+            "name": "name goes here",
+            "instructions": "instructions goes here",
+            "role": "user"
+        }
+    }
+}
+```
 ## Contributing
 
 Contributions are welcome! If you have any ideas, suggestions, or bug fixes, please feel free to open an issue or submit a pull request.
