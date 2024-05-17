@@ -10,7 +10,10 @@ load_dotenv()
 
 
 def get_config():
-    """Get the configuration from the config.json file."""
+    """
+    Get the configuration from the config.json file.
+    Task name, instructions, and role are defined in the config.json file.
+    """
     with open("config.json") as f:
         return json.load(f)
 
@@ -36,7 +39,7 @@ def _print_self_name(func):
 
 
 class OpenAIClient:
-    """Client for interacting with OpenAI's GPT API for chat-based responses."""
+    """Client for interacting with OpenAI's GPT API."""
     def __init__(self):
         """Initialize the OpenAIClient with the API key from environment variables."""
         self.config = get_config()
@@ -79,7 +82,7 @@ class OpenAIClient:
         """Waits for the assistant's run to complete."""
         idx = 0
         while run.status in ["queued", "in_progress"]:
-            print(f"Waiting for assistant to load...")
+            print(f"Waiting for the assistant to complete the task... ({idx + 1})", end="\r")
             idx = (idx + 1) % 4
             time.sleep(0.5)
             run = self.client.beta.threads.runs.retrieve(
@@ -119,63 +122,56 @@ def main():
     client = OpenAIClient()
     thread = client.create_thread()
     
+    def get_input(prompt):
+        """Helper function to get user input and check for 'q' to quit."""
+        user_input = input(prompt).strip().lower()
+        if user_input == 'q':
+            client.delete_thread(thread.id)
+            print("Session ended. Goodbye!")
+            exit()
+        return user_input
+    
     while True:
-        # Display available tasks
-        for task_num in client.config["tasks"]:
-            print(f"{task_num}: {client.config['tasks'][task_num]['name']}")
+        print("\nType 'q' to quit at any time.")
         
-        print("Type 'q' to quit.")
+        # Collecting user details
+        user_input_niche = get_input("Please type in your niche: ")
+        user_input_title = get_input("Please type in your title: ")
+        user_input_description = get_input("Please type in your description: ")
         
-        # Get user niche input and check for 'q' in one line
-        if (user_input_niche := input("Please type in your niche: ").strip().lower()) == 'q':
-            client.delete_thread(thread.id)
-            print("Session ended. Goodbye!")
-            break
-        
-        # Get user title input and check for 'q' in one line
-        if (user_input_title := input("Please type in your title: ").strip().lower()) == 'q':
-            client.delete_thread(thread.id)
-            print("Session ended. Goodbye!")
-            break
-        
-        # Get user description input and check for 'q' in one line
-        if (user_input_description := input("Please type in your description: ").strip().lower()) == 'q':
-            client.delete_thread(thread.id)
-            print("Session ended. Goodbye!")
-            break
-        
-        # Get user task input and check for 'q'
-        if (user_input_task := input("Please select a task number: ").strip().lower()) == 'q':
-            client.delete_thread(thread.id)
-            print("Session ended. Goodbye!")
-            break
-        
-        # Validate the task number
-        if user_input_task not in client.config["tasks"]:
-            print("Invalid task number. Please try again.")
-            continue
-        
-        # Process the valid task
         niche = f"Niche: {user_input_niche}"
-        title = f"title: {user_input_title}"
-        description = f"description: {user_input_description}"
-        
-      
+        title = f"Title: {user_input_title}"
+        description = f"Description: {user_input_description}"
         user_input = f"{niche}\n{title}\n{description}"
-        task = user_input_task
-        task_instructions = client.config['tasks'][task]['instructions']
-        task_role = client.config['tasks'][task]['role']
-        
-        print(f"Selected Task: {client.config['tasks'][task]['name']}")
-        print(task_instructions)
-        
-        message = client.create_message(thread.id, user_input, task_role)
-        run = client.create_run(thread.id, client.get_assistant().id, task_instructions)
-        
-        run = client.wait_on_run(run, thread.id)
-        response = client.retrieve_message(thread.id, message.id)
-        
-        print(response)
+
+        while True:
+            print("-" * 16, "Tasks", "-" * 17)
+            
+            # Display available tasks
+            for task_num, task in client.config["tasks"].items():
+                print(f"{task_num}: {task['name']}")
+            
+            # Get user task input and validate
+            user_input_task = get_input("Please type in the task number: ")
+            if user_input_task not in client.config["tasks"]:
+                print("Invalid task number. Please try again.")
+                continue
+            
+            task = user_input_task
+            task_name = client.config['tasks'][task]['name']
+            task_instructions = client.config['tasks'][task]['instructions']
+            task_role = client.config['tasks'][task]['role']
+            
+            print(f"Processing task {task}: {task_name}\nInstructions: {task_instructions}\nRole: {task_role}\n")
+            
+            message = client.create_message(thread.id, user_input, task_role)
+            run = client.create_run(thread.id, client.get_assistant().id, task_instructions)
+            
+            run = client.wait_on_run(run, thread.id)
+            response = client.retrieve_message(thread.id, message.id)
+            
+            print(response)
+            break
 
 
 if __name__ == "__main__":
