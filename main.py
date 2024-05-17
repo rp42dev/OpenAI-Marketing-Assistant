@@ -78,7 +78,7 @@ class OpenAIClient:
         """Waits for the assistant's run to complete."""
         idx = 0
         while run.status in ["queued", "in_progress"]:
-            print(f"Waiting for assistant to load...", end="\r")
+            print(f"Waiting for assistant to load...")
             idx = (idx + 1) % 4
             time.sleep(0.5)
             run = self.client.beta.threads.runs.retrieve(
@@ -120,8 +120,8 @@ def main():
     
     while True:
         # Display available tasks
-        for task_num in client.config:
-            print(f"{task_num}: {client.config[task_num]['name']}")
+        for task_num in client.config["tasks"]:
+            print(f"{task_num}: {client.config['tasks'][task_num]['name']}")
         
         # Get user input
         user_input = input("Please select a task number or 'q' to quit: ").strip()
@@ -133,16 +133,16 @@ def main():
             break
         
         # Validate the task number
-        if user_input not in client.config:
+        if user_input not in client.config["tasks"]:
             print("Invalid task number. Please try again.")
             continue
         
         # Process the valid task
         task = user_input
-        task_content = client.config[task]["content"]
-        task_role = client.config[task]["role"]
+        task_content = client.config['tasks'][task]['content']
+        task_role = client.config['tasks'][task]['role']
         
-        print(f"Selected Task: {client.config[task]['name']}")
+        print(f"Selected Task: {client.config['tasks'][task]['name']}")
         print(task_content)
         
         message = client.create_message(thread.id, task_content, task_role)
@@ -152,7 +152,6 @@ def main():
         response = client.retrieve_message(thread.id, message.id)
         
         print(response)
-
 
 
 if __name__ == "__main__":
