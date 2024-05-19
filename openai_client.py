@@ -60,12 +60,6 @@ class OpenAIClient:
         result = self.client.beta.threads.delete(thread_id)
         return result
     
-    @_handle_api_exceptions
-    def create_run(self, thread_id, assistant_id, task_instructions):
-        """Create a new run with the assistant agent based on the thread ID and assistant ID."""
-        run = self.client.beta.threads.runs.create(thread_id=thread_id, assistant_id=assistant_id, instructions=task_instructions)
-        return run
-    
     def stream_run(self, thread_id, assistant_id, task_instructions):
         """Stream the assistant's run process."""
         with self.client.beta.threads.runs.stream(
@@ -75,19 +69,6 @@ class OpenAIClient:
             event_handler=EventHandler()
             ) as stream:
             stream.until_done()
-    
-    @_handle_api_exceptions
-    def wait_on_run(self, run, thread_id):
-        """Waits for the assistant's run to complete."""
-        idx = 0
-        while run.status in ["queued", "in_progress"]:
-            print(f"Waiting for the assistant to complete the task... ({idx + 1})", end="\r")
-            idx = (idx + 1) % 4
-            time.sleep(0.5)
-            run = self.client.beta.threads.runs.retrieve(
-                run_id=run.id, thread_id=thread_id
-            )
-        return run
     
     @_handle_api_exceptions
     def create_message(self, thread_id, content, role):
