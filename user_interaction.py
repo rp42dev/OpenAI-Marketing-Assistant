@@ -14,7 +14,8 @@ def get_input(prompt, client, thread):
 
 def collect_user_details(client, thread):
     """Function to collect user details."""
-    print("\nType 'q' to quit at any time.")
+    print("\nType 'q' to quit at any time.", end="\n\n")
+    print("Details", "-" * 23, end="\n")
     niche = f"Niche: {get_input('Please type in your niche: ', client, thread)}"
     title = f"Title: {get_input('Please type in your title: ', client, thread)}"
     description = f"Description: {get_input('Please type in your description: ', client, thread)}"
@@ -22,7 +23,7 @@ def collect_user_details(client, thread):
 
 def display_tasks(client):
     """Function to display available tasks."""
-    print("-" * 16, "Tasks", "-" * 16)
+    print("\nTasks", "-" * 25, end="\n")
     for task_num, task in client.config["tasks"].items():
         print(f"{task_num}: {task['name']}")
 
