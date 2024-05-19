@@ -8,7 +8,7 @@ class EventHandler(AssistantEventHandler):
   @override
   def on_text_created(self, text) -> None:
     print(f"\nassistant > ", end="", flush=True)
-    print(f"text.value\n", end="", flush=True)
+    print(text.value, end="", flush=True)
       
   @override
   def on_text_delta(self, delta, snapshot):

@@ -8,7 +8,7 @@ def get_input(prompt, client, thread):
         exit()
     if user_input == 'q':
         client.delete_thread(thread.id)
-        print("Session ended. Goodbye!")
+        print("\nSession ended. Goodbye!")
         exit()
     return user_input
 
@@ -22,7 +22,7 @@ def collect_user_details(client, thread):
 
 def display_tasks(client):
     """Function to display available tasks."""
-    print("-" * 16, "Tasks", "-" * 17)
+    print("-" * 16, "Tasks", "-" * 16)
     for task_num, task in client.config["tasks"].items():
         print(f"{task_num}: {task['name']}")
 
