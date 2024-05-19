@@ -7,9 +7,8 @@ def process_task(client, thread, task, user_input):
     print(f"Processing task {task}: {task_name}\nInstructions: {task_instructions}\nRole: {task_role}\n")
     
     message = client.create_message(thread.id, user_input, task_role)
-    run = client.create_run(thread.id, client.get_assistant().id, task_instructions)
+    run = client.stream_run(thread.id, client.get_assistant().id, task_instructions)
     
-    run = client.wait_on_run(run, thread.id)
     response = client.retrieve_message(thread.id, message.id)
     
     print(response)

@@ -5,6 +5,8 @@ from openai import OpenAI, APIError, APIConnectionError, RateLimitError
 import time
 import json
 
+from openai_event_handler import EventHandler
+
 load_dotenv()
 
 def get_config():
@@ -60,9 +62,19 @@ class OpenAIClient:
     
     @_handle_api_exceptions
     def create_run(self, thread_id, assistant_id, task_instructions):
-        """Create a new message in the thread with the assistant agent."""
-        message = self.client.beta.threads.runs.create(thread_id=thread_id, assistant_id=assistant_id, instructions=task_instructions)
-        return message
+        """Create a new run with the assistant agent based on the thread ID and assistant ID."""
+        run = self.client.beta.threads.runs.create(thread_id=thread_id, assistant_id=assistant_id, instructions=task_instructions)
+        return run
+    
+    def stream_run(self, thread_id, assistant_id, task_instructions):
+        """Stream the assistant's run process."""
+        with self.client.beta.threads.runs.stream(
+            thread_id=thread_id, 
+            assistant_id=assistant_id, 
+            instructions=task_instructions,
+            event_handler=EventHandler()
+            ) as stream:
+            stream.until_done()
     
     @_handle_api_exceptions
     def wait_on_run(self, run, thread_id):

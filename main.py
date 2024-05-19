@@ -1,4 +1,4 @@
-from client_operations import OpenAIClient
+from openai_client import OpenAIClient
 from user_interaction import collect_user_details, display_tasks, select_task
 from task_processor import process_task
 
@@ -15,4 +15,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

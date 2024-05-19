@@ -20,7 +20,7 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
 {
     "tasks": {
         "1": {
-            "name": "find a ideal customer",
+            "name": "find an ideal customer",
             "instructions": "based on user input, find a ideal customer for the user in niche market. (keep it short and simple)",
             "role": "user"
         },
