@@ -1,6 +1,11 @@
 def get_input(prompt, client, thread):
     """Helper function to get user input and check for 'q' to quit."""
-    user_input = input(prompt).strip().lower()
+    try:
+        user_input = input(prompt).strip().lower()
+    except (KeyboardInterrupt, EOFError):
+        client.delete_thread(thread.id)
+        print("\nSession ended. Goodbye!")
+        exit()
     if user_input == 'q':
         client.delete_thread(thread.id)
         print("Session ended. Goodbye!")

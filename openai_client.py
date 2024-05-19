@@ -1,21 +1,8 @@
-import os
-from dotenv import load_dotenv
 from functools import wraps
 from openai import OpenAI, APIError, APIConnectionError, RateLimitError
-import time
-import json
 
 from openai_event_handler import EventHandler
 
-load_dotenv()
-
-def get_config():
-    """
-    Get the configuration from the config.json file.
-    Task name, instructions, and role are defined in the config.json file.
-    """
-    with open("config.json") as f:
-        return json.load(f)
 
 def _handle_api_exceptions(func):
     """Decorator to handle common API exceptions."""
@@ -29,11 +16,11 @@ def _handle_api_exceptions(func):
 
 class OpenAIClient:
     """Client for interacting with OpenAI's GPT API."""
-    def __init__(self):
+    def __init__(self, config=None, api_key=None, assistant_id=None):
         """Initialize the OpenAIClient with the API key from environment variables."""
-        self.config = get_config()
-        self.OPENAI_API_TOKEN = os.getenv("OPENAI_API_TOKEN")
-        self.ASSISTANT_ID_TOKEN = os.getenv("ASSISTANT_ID_TOKEN")
+        self.config = config
+        self.OPENAI_API_TOKEN = api_key
+        self.ASSISTANT_ID_TOKEN = assistant_id
         self.client = OpenAI(api_key=self.OPENAI_API_TOKEN)
     
     @_handle_api_exceptions
