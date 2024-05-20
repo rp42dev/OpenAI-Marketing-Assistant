@@ -47,6 +47,7 @@ class OpenAIClient:
         result = self.client.beta.threads.delete(thread_id)
         return result
     
+    @_handle_api_exceptions
     def stream_run(self, thread_id, assistant_id, task_instructions):
         """Stream the assistant's run process."""
         with self.client.beta.threads.runs.stream(

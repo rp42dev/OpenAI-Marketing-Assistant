@@ -4,11 +4,11 @@ def get_input(prompt, client, thread):
         user_input = input(prompt).strip().lower()
     except (KeyboardInterrupt, EOFError):
         client.delete_thread(thread.id)
-        print("\nSession ended. Goodbye!")
+        print("\n\nSession ended. Goodbye!")
         exit()
     if user_input == 'q':
         client.delete_thread(thread.id)
-        print("\nSession ended. Goodbye!")
+        print("\n\nSession ended. Goodbye!")
         exit()
     return user_input
 

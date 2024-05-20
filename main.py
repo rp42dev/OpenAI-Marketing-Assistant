@@ -10,6 +10,7 @@ load_dotenv()
 OPENAI_API_TOKEN = os.getenv("OPENAI_API_TOKEN")
 ASSISTANT_ID_TOKEN = os.getenv("ASSISTANT_ID_TOKEN")
 
+
 def get_config():
     """
     Get the configuration from the config.json file.
@@ -32,6 +33,7 @@ def main():
         display_tasks(client)
         task = select_task(client, thread)
         process_task(client, thread, task, user_input)
+
 
 if __name__ == "__main__":
     main()
