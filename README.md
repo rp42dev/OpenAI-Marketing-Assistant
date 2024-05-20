@@ -20,19 +20,16 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
 {
     "tasks": {
         "1": {
-            "name": "Identify Niche Problem and solution",  
-            "instructions": "Task 1: Based on user input, identify a niche problem and solution that the product or service can address. Provide a brief description of the problem and how the product or service can solve it.",
-            "role": "system"
+            "name": "Identify Niche Problem and Solution",
+            "instructions": "Based on user input, identify a specific problem within a niche and propose a solution that your product or service addresses. Provide a brief description of both the problem and how the product or service can solve it."
         },
         "2": {
-            "name": "Define Target Audience and create Avatar",
-            "instructions": "Task 2: based on previous task 1, define the target audience and create an avatar for the target audience. Include demographics, psychographics, and any other relevant information.",
-            "role": "system"
+            "name": "Define Target Audience and Create Avatar",
+            "instructions": "Using the information from Task 1, define the target audience and create a detailed avatar. Include demographics, psychographics, and any other relevant details."
         },
         "3": {
-            "name": "Write a Sales Letter in the form of a Story PAS",
-            "instructions": "task 3: Write a sales letter in the form of a story using the Problem-Agitate-Solution (PAS) framework. The story should address the problem identified in task 1 and task 2, how the product or service can solve it.",
-            "role": "system"
+            "name": "Write a Sales Letter in Story Form Using PAS Framework",
+            "instructions": "Write a sales letter in the form of a story using the Problem-Agitate-Solution (PAS) framework. The story should address the problem identified in Tasks 1 and 2 and demonstrate how the product or service can provide a solution."
         }
     }
 }
