@@ -22,21 +22,22 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
         "1": {
             "name": "Identify Niche Problem and solution",  
             "instructions": "Task 1: Based on user input, identify a niche problem and solution that the product or service can address. Provide a brief description of the problem and how the product or service can solve it.",
-            "role": "user"
+            "role": "system"
         },
         "2": {
             "name": "Define Target Audience and create Avatar",
-            "instructions": "Task 2: based on previous task, define the target audience and create an avatar for the target audience. Include demographics, psychographics, and any other relevant information.",
-            "role": "user"
+            "instructions": "Task 2: based on previous task 1, define the target audience and create an avatar for the target audience. Include demographics, psychographics, and any other relevant information.",
+            "role": "system"
         },
         "3": {
             "name": "Write a Sales Letter in the form of a Story PAS",
-            "instructions": "task 3: Write a sales letter in the form of a story using the Problem-Agitate-Solution (PAS) framework. The story should address the problem identified in task 1 and how the product or service can solve it.",
-            "role": "user"
+            "instructions": "task 3: Write a sales letter in the form of a story using the Problem-Agitate-Solution (PAS) framework. The story should address the problem identified in task 1 and task 2, how the product or service can solve it.",
+            "role": "system"
         }
     }
 }
 ```
+
 ## Contributing
 
 Contributions are welcome! If you have any ideas, suggestions, or bug fixes, please feel free to open an issue or submit a pull request.
