@@ -11,12 +11,24 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
 ## Usage
 
 1. Install dependencies by running `pip install -r requirements.txt`.
-2. Set up the OpenAI API key and other environment variables.
-3. Run `main.py` to start the OpenAI Marketing Assistant toolkit.
+2. Set up the OpenAI API key and other environment variables(see `.env.example`).
+3. Add config.json file with the tasks and instructions(see example below).
+4. Run `main.py` to start the OpenAI Marketing Assistant toolkit.
 
-## Configuration file example
+### .env file example
+
+```env
+OPENAI_API_TOKEN=sk-proj-1234567890...
+FREEIMAGE_HOST_API_KEY=1234567890...
+VS_ID_TOKEN=vs_1234567890...
+ASSISTANT_ID_TOKEN=asst_1234567890...
+ORGANIZATION_ID_TOKEN=org-1234567890...
+```
+
+### Configuration file example
 
 ```json
+// config.json
 {
     "tasks": {
         "1": {

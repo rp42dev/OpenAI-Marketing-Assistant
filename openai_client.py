@@ -14,6 +14,7 @@ def _handle_api_exceptions(func):
             return f"An error occurred in the \"{func.__name__}\" function: {e}"
     return wrapper
 
+
 class OpenAIClient:
     """Client for interacting with OpenAI's GPT API."""
     def __init__(self, config=None, api_key=None, assistant_id=None):
