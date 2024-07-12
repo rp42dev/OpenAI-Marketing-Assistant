@@ -15,7 +15,7 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
 3. Add config.json file with the tasks and instructions(see example below).
 4. Run `main.py` to start the OpenAI Marketing Assistant toolkit.
 
-### .env file example
+### Environment variables example (.env)
 
 ```env
 OPENAI_API_TOKEN=sk-proj-1234567890...
@@ -25,7 +25,7 @@ ASSISTANT_ID_TOKEN=asst_1234567890...
 ORGANIZATION_ID_TOKEN=org-1234567890...
 ```
 
-### Configuration file example
+### Configuration file example (config.json)
 
 ```json
 // config.json
