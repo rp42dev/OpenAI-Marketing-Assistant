@@ -8,12 +8,44 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
 - **Sales Letter Generation:** Automatically generate persuasive sales letters tailored to the audience.
 - **Email Marketing Optimization:** Optimize marketing emails with AI-generated content for increased engagement and conversion rates.
 
+## Prerequisites
+
+- Python 3.6 or higher
+- OpenAI API key(see [OpenAI API](https://beta.openai.com/signup/) for more information)
+
 ## Usage
 
-1. Install dependencies by running `pip install -r requirements.txt`.
-2. Set up the OpenAI API key and other environment variables(see `.env.example`).
-3. Add config.json file with the tasks and instructions(see example below).
-4. Run `main.py` to start the OpenAI Marketing Assistant toolkit.
+1. Clone the repository:
+
+```bash
+git clone
+```
+
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Set up environment variables:
+
+Create a `.env` file in the root directory of the project and add the following environment variables but make sure to replace the values with your own.
+
+[Environment variables example](#environment-variables-example-env)
+
+
+4. Set up configuration file:
+
+Create a `config.json` file in the root directory of the project and add the following configuration, use the example below as a guide.
+
+[Configuration file example](#configuration-file-example-configjson)
+
+
+5. Run the script:
+
+```bash
+python main.py
+```
 
 ### Environment variables example (.env)
 
