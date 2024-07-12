@@ -3,7 +3,7 @@ import json
 from dotenv import load_dotenv
 from openai_client import OpenAIClient
 from user_interaction import collect_user_details, display_tasks, select_task, correct_responses
-from task_processor import process_task, process_message, correct_task_response
+from task_processor import process_task, process_message
 
 load_dotenv()
 
@@ -28,7 +28,6 @@ def main():
     client = OpenAIClient(config=config, api_key=OPENAI_API_TOKEN, assistant_id=ASSISTANT_ID_TOKEN)
     thread = client.create_thread()
 
-    print("\nType 'q' to quit at any time.", end="\n\n")
     user_input = collect_user_details(client, thread)
 
     process_message(client, thread, user_input)
@@ -36,7 +35,6 @@ def main():
     idx = 0
     while True:
         if not idx == 0:
-            print("\nType 'q' to quit at any time.", end="\n\n")
             idx += 1
 
         display_tasks(client)
@@ -45,10 +43,11 @@ def main():
         process_task(client, thread, task)
         
         while True:
-            user_input = correct_responses()
+            user_input = correct_responses(client, thread)
         
             if user_input:
-                correct_task_response(client, thread, user_input, task)
+                process_message(client, thread, user_input)
+                process_task(client, thread, "8")
             else:
                 break
 

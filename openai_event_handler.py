@@ -7,7 +7,7 @@ class EventHandler(AssistantEventHandler):
     @override
     def on_text_created(self, text) -> None:
         """Function to handle the text created event."""
-        print(f"\nAssistant >", end=" ", flush=True)
+        print(f"\nASSISTANT:", end="\n", flush=True)
         
     @override
     def on_text_delta(self, delta, snapshot):
@@ -17,4 +17,4 @@ class EventHandler(AssistantEventHandler):
     @override
     def on_message_done(self, message):
         """Function to handle the message done event."""
-        print(f"\n\nMessage done: {message.id}\n\n")
+        print(f"\n\nMessage done: {message.id}\n")

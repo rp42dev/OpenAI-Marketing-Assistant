@@ -21,7 +21,7 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
     "tasks": {
         "1": {
             "name": "Identify Niche Problem and Solution",
-            "instructions": "Based on user input, identify a specific problem within a niche and propose a solution that the product or service addresses. Provide a brief description of both the problem and how the product or service can solve it."
+            "instructions": "Based on user input, identify a specific problem within a niche and propose a solution that product or service addresses. Provide a brief description of both the problem and how the product or service can solve it."
         },
         "2": {
             "name": "Define Target Audience and Create Avatar",
@@ -30,6 +30,26 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
         "3": {
             "name": "Write a Sales Letter in Story Form Using PAS Framework",
             "instructions": "Write a sales letter in the form of a story using the Problem-Agitate-Solution (PAS) framework. The story should address the problem identified in Tasks 1 and 2 and demonstrate how the product or service can provide a solution."
+        },
+        "4": {
+            "name": "Create a Landing Page for the Product or Service",
+            "instructions": "Create a landing page for the product or service that includes a headline, subheadline, call-to-action, and any other relevant information. The landing page should be designed to convert visitors into leads or customers."
+        },
+        "5": {
+            "name": "Develop a Lead Magnet to Capture Email Addresses",
+            "instructions": "Develop a lead magnet that provides value to the target audience and captures email addresses. The lead magnet should be related to the product or service and encourage visitors to sign up for more information."
+        },
+        "6": {
+            "name": "Create a Follow-Up Email Sequence",
+            "instructions": "Create a follow-up email sequence that nurtures leads and encourages them to take the desired action. The sequence should include a series of emails that provide value, build trust, and address objections."
+        },
+        "7": {
+            "name": "Design a Facebook Ad Campaign",
+            "instructions": "Design a Facebook ad campaign that targets the defined audience and drives traffic to the landing page. The campaign should include ad copy, images, and targeting options that are relevant to the target audience."
+        },
+        "8": {
+            "name": "Task Correction",
+            "instructions": "Make corrections to the previous response based on user input"
         }
     }
 }
