@@ -19,16 +19,12 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
 
 ```env
 OPENAI_API_TOKEN=sk-proj-1234567890...
-FREEIMAGE_HOST_API_KEY=1234567890...
-VS_ID_TOKEN=vs_1234567890...
 ASSISTANT_ID_TOKEN=asst_1234567890...
-ORGANIZATION_ID_TOKEN=org-1234567890...
 ```
 
 ### Configuration file example (config.json)
 
 ```json
-// config.json
 {
     "tasks": {
         "1": {
