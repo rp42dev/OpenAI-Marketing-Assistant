@@ -21,7 +21,7 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
     "tasks": {
         "1": {
             "name": "Identify Niche Problem and Solution",
-            "instructions": "Based on user input, identify a specific problem within a niche and propose a solution that your product or service addresses. Provide a brief description of both the problem and how the product or service can solve it."
+            "instructions": "Based on user input, identify a specific problem within a niche and propose a solution that the product or service addresses. Provide a brief description of both the problem and how the product or service can solve it."
         },
         "2": {
             "name": "Define Target Audience and Create Avatar",

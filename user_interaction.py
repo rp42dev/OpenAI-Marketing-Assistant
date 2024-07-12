@@ -33,3 +33,14 @@ def select_task(client, thread):
         if user_input_task in client.config["tasks"]:
             return user_input_task
         print("Invalid task number. Please try again.\n\n")
+
+def correct_responses():
+    """Function to alow user to correct responses."""
+    while True:
+        user_input = input("Would you like to correct the response? (yes/no): ").strip().lower()
+        if user_input == 'yes':
+            user_input = input("Please type is what corrections you would like to make: ")
+            return user_input
+        elif user_input == 'no':
+            return False
+        print("Invalid input. Please try again.\n")

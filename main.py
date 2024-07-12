@@ -2,8 +2,8 @@ import os
 import json
 from dotenv import load_dotenv
 from openai_client import OpenAIClient
-from user_interaction import collect_user_details, display_tasks, select_task
-from task_processor import process_task, process_message
+from user_interaction import collect_user_details, display_tasks, select_task, correct_responses
+from task_processor import process_task, process_message, correct_task_response
 
 load_dotenv()
 
@@ -43,7 +43,14 @@ def main():
         task = select_task(client, thread)
         
         process_task(client, thread, task)
-
+        
+        while True:
+            user_input = correct_responses()
+        
+            if user_input:
+                correct_task_response(client, thread, user_input, task)
+            else:
+                break
 
 if __name__ == "__main__":
     main()
