@@ -1,18 +1,6 @@
-from functools import wraps
-from openai import OpenAI, APIError, APIConnectionError, RateLimitError
-
+from openai import OpenAI
 from openai_event_handler import EventHandler
-
-
-def _handle_api_exceptions(func):
-    """Decorator to handle common API exceptions."""
-    @wraps(func)
-    def wrapper(self, *args, **kwargs):
-        try:
-            return func(self, *args, **kwargs)
-        except (APIError, APIConnectionError, RateLimitError) as e:
-            return f"An error occurred in the \"{func.__name__}\" function: {e}"
-    return wrapper
+from decorators import _handle_api_exceptions
 
 
 class OpenAIClient:
