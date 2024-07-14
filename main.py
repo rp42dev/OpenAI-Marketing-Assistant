@@ -1,6 +1,5 @@
 import os
 import json
-import os
 from dotenv import load_dotenv
 from openai_client import OpenAIClient
 from user_interaction import collect_user_details, display_tasks, select_task, correct_responses

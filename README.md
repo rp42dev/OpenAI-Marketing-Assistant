@@ -7,11 +7,6 @@ The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API fo
 - **Identify Niche Problem and Solution**
 - **Define Target Audience and Create Avatar**
 - **Write a Sales Letter in Story Form Using PAS Framework**
-- **Create a Landing Page for the Product or Service**
-- **Develop a Lead Magnet to Capture Email Addresses**
-- **Create a Follow-Up Email Sequence**
-- **Design a Facebook Ad Campaign**
-- **Task Correction**
 
 ## Prerequisites
 
