@@ -2,7 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from openai_client import OpenAIClient
-from user_interaction import collect_user_details, display_tasks, select_task, correct_responses, display_task_groups, select_task_group
+from user_interaction import collect_user_details, correct_responses, display_options, select_option, quit_handler
 from task_processor import process_task, process_message
 
 # Load environment variables from .env file
@@ -39,16 +39,19 @@ def main():
     while True:
         # Display available task groups and select one
         task_groups = client.config["task_groups"]
-        display_task_groups(task_groups)
+        display_options(task_groups, "TASK GROUPS (Please select a task group)", is_task_group=True)
         
-        selected_group = select_task_group(task_groups, client, thread)
+        selected_group = select_option(task_groups, "Please type in the task group number", lambda: quit_handler(client, thread))
+        if selected_group is None:
+            print("Exiting...")
+            break
         
         while True:
             # Display available tasks within the selected group and select one
             tasks = task_groups[selected_group]
-            display_tasks(str(selected_group), tasks)
+            display_options(tasks, f"TASKS ({selected_group})", is_task_group=False)
             
-            selected_task = select_task(tasks, client, thread)
+            selected_task = select_option(tasks, "Please type in the task number", lambda: quit_handler(client, thread), back_option=True)
             if selected_task is None:
                 break
             
@@ -57,7 +60,7 @@ def main():
             while True:
                 # Allow user to correct responses or proceed
                 user_input = correct_responses(client, thread)
-                if user_input == None:
+                if user_input is None:
                     break
                 elif user_input:
                     process_message(client, thread, user_input)

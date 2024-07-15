@@ -1,17 +1,19 @@
 # OpenAI Marketing Assistant
 
-The OpenAI Marketing Assistant is a toolkit designed to leverage OpenAI's API for various marketing tasks. Whether you need help pinpointing target audiences, crafting persuasive sales letters, or optimizing marketing emails, this toolkit harnesses the power of AI-generated content to boost the campaigns.
+Command line tool to leverage OpenAI's API for various marketing tasks.
 
-## Features/Tasks
+## Features/Tasks examples
 
 - **Identify Niche Problem and Solution**
 - **Define Target Audience and Create Avatar**
 - **Write a Sales Letter in Story Form Using PAS Framework**
+- **Create a Landing Page for the Product or Service**
 
 ## Prerequisites
 
 - Python 3.6 or higher
 - OpenAI API key(see [OpenAI API](https://beta.openai.com/signup/) for more information)
+- OpenAI Assistant ID token(see [OpenAI API](https://beta.openai.com/signup/) for more information)
 
 ## Usage
 
