@@ -84,7 +84,7 @@ ASSISTANT_ID_TOKEN=asst_1234567890...
         }
     },
     "function_groups": {
-        "functions": {
+        "corrections": {
             "1": {
                 "name": "Task Correction",
                 "instructions": "Make corrections to the previous response based on user input"
