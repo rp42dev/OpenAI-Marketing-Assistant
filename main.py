@@ -2,7 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from openai_client import OpenAIClient
-from user_interaction import collect_user_details, display_tasks, select_task, correct_responses
+from user_interaction import collect_user_details, display_tasks, select_task, correct_responses, display_task_groups, select_task_group
 from task_processor import process_task, process_message
 
 # Load environment variables from .env file
@@ -37,19 +37,30 @@ def main():
     process_message(client, thread, user_input)
     
     while True:
-        # Display available tasks and select one
-        display_tasks(client)
-        user_input = select_task(client, thread)
-        process_task(client, thread, "tasks", user_input)
+        # Display available task groups and select one
+        task_groups = client.config["task_groups"]
+        display_task_groups(task_groups)
+        
+        selected_group = select_task_group(task_groups, client, thread)
         
         while True:
-            # Allow user to correct responses or proceed
-            user_input = correct_responses(client, thread)
-            if user_input:
-                process_message(client, thread, user_input)
-                process_task(client, thread, "functions", "1")
-            else:
+            # Display available tasks within the selected group and select one
+            tasks = task_groups[selected_group]
+            display_tasks(tasks)
+            
+            selected_task = select_task(tasks, client, thread)
+            if selected_task is None:
                 break
+            
+            process_task(client, thread, "task_groups", selected_group, selected_task)
+            
+            while True:
+                # Allow user to correct responses or proceed
+                user_input = correct_responses(client, thread)
+                if user_input:
+                    process_message(client, thread, user_input)
+                else:
+                    break
 
 
 if __name__ == "__main__":

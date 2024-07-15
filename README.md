@@ -58,28 +58,35 @@ ASSISTANT_ID_TOKEN=asst_1234567890...
 
 ```json
 {
-    "tasks": {
-        "1": {
-            "name": "Identify Niche Problem and Solution",
-            "instructions": "Based on user input, identify a specific problem within a niche and propose a solution that product or service addresses. Provide a brief description of both the problem and how the product or service can solve it."
+    "task_groups": {
+        "Market Research and Targeting": {
+            "1": {
+                "name": "Identify Niche Problem and Solution",
+                "instructions": "Identify a specific problem within a niche and propose a solution that product or service addresses. Provide a brief description of both the problem and how the product or service can solve it."
+            },
+            "2": {
+                "name": "Define Target Audience and Create Avatar",
+                "instructions": "Define the target audience and create a detailed avatar. Include demographics, psychographics, and any other relevant details."
+            }
         },
-        "2": {
-            "name": "Define Target Audience and Create Avatar",
-            "instructions": "Using the information from Task 1, define the target audience and create a detailed avatar. Include demographics, psychographics, and any other relevant details."
-        },
-        "3": {
-            "name": "Write a Sales Letter in Story Form Using PAS Framework",
-            "instructions": "Write a sales letter in the form of a story using the Problem-Agitate-Solution (PAS) framework. The story should address the problem identified in Tasks 1 and 2 and demonstrate how the product or service can provide a solution."
-        },
-        "4": {
-            "name": "Create a Landing Page for the Product or Service",
-            "instructions": "Create a landing page for the product or service that includes a headline, subheadline, call-to-action, and any other relevant information. The landing page should be designed to convert visitors into leads or customers."
+        "Marketing and Promotion": {
+
+            "1": {
+                "name": "Write a Sales Letter in Story Form Using PAS Framework",
+                "instructions": "Write a sales letter in the form of a story using the Problem-Agitate-Solution (PAS) framework. The letter should address the target audience's pain points, agitate the problem, and present the product or service as the solution."
+            },
+            "2": {
+                "name": "Create a Landing Page for the Product or Service",
+                "instructions": "Create a landing page for the product or service that includes a headline, subheadline, call-to-action, and any other relevant information. The landing page should be designed to convert visitors into leads or customers."
+            }
         }
     },
-    "functions": {
-        "1": {
-            "name": "Task Correction",
-            "instructions": "Make corrections to the previous response based on user input"
+    "function_groups": {
+        "functions": {
+            "1": {
+                "name": "Task Correction",
+                "instructions": "Make corrections to the previous response based on user input"
+            }
         }
     }
 }

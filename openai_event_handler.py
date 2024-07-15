@@ -17,4 +17,4 @@ class EventHandler(AssistantEventHandler):
     @override
     def on_message_done(self, message):
         """Function to handle the message done event."""
-        print(f"\nMessage done: {message.id}", end="\n", flush=True)
+        print(f"\n\nMessage done: {message.id}", end="\n", flush=True)
