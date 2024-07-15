@@ -41,9 +41,10 @@ def select_task_group(task_groups: dict, client, thread):
         print("Invalid task group number. Please try again.", end="\n")
         
 
-def display_tasks(tasks: dict):
+def display_tasks(group_name: str, tasks: dict):
     """Function to display available tasks within a selected group."""
-    print("\nTASKS\n" + "-" * 23)
+    print(f"\nTASKS ({group_name})")
+    print("-" * (len(group_name) + 8))
     for task_key, task_details in tasks.items():
         print(f"{task_key}. {task_details['name']}")
 
@@ -51,7 +52,7 @@ def display_tasks(tasks: dict):
 def select_task(tasks: dict, client, thread):
     """Function to select a task and validate the selection."""
     while True:
-        user_input_task = get_input(" | b to go back | Please type in the task number: ", lambda: quit_handler(client, thread))
+        user_input_task = get_input("b to go back | Please type in the task number: ", lambda: quit_handler(client, thread))
         if user_input_task.lower() == 'b':
             return None
         if user_input_task in tasks:
@@ -64,7 +65,7 @@ def correct_responses(client, thread):
     while True:
         user_input = get_input("Would you like to make corrections to the response? (yes/no): ", lambda: quit_handler(client, thread))
         if user_input == 'yes':
-            user_input = get_input(" | b to go back | Please type in the corrected response: ", lambda: quit_handler(client, thread))
+            user_input = get_input("b to go back | Please type in the corrected response: ", lambda: quit_handler(client, thread))
             if user_input.lower() == 'b':
                 return None
             return user_input

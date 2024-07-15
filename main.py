@@ -46,7 +46,7 @@ def main():
         while True:
             # Display available tasks within the selected group and select one
             tasks = task_groups[selected_group]
-            display_tasks(tasks)
+            display_tasks(str(selected_group), tasks)
             
             selected_task = select_task(tasks, client, thread)
             if selected_task is None:
