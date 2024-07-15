@@ -3,7 +3,8 @@ import json
 from dotenv import load_dotenv
 from openai_client import OpenAIClient
 from user_interaction import UserInteraction
-from task_processor import process_task, process_message
+from task_processor import MessageProcessor
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -33,9 +34,12 @@ def main():
     # Initialize UserInteraction
     ui = UserInteraction(client, thread)
     
+    # Instantiate the MessageProcessor
+    processor = MessageProcessor(client, thread)
+    
     # Collect user details and process the initial message
     user_input = ui.collect_user_details()
-    process_message(client, thread, user_input)
+    processor.process_message(user_input)
     
     while True:
         # Display available task groups and select one
@@ -56,7 +60,7 @@ def main():
             if selected_task is None:
                 break
             
-            process_task(client, thread, "task_groups", selected_group, selected_task)
+            processor.process_task("task_groups", selected_group, selected_task)
             
             while True:
                 # Allow user to correct responses or proceed
@@ -64,8 +68,8 @@ def main():
                 if user_input is None:
                     break
                 elif user_input:
-                    process_message(client, thread, user_input)
-                    process_task(client, thread, "function_groups", "corrections", "1")
+                    processor.process_message(user_input)
+                    processor.process_task("function_groups", "corrections", "1")
                 break
 
 
