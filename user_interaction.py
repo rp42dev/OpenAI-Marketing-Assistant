@@ -18,15 +18,17 @@ def quit_handler(client, thread):
 
 def collect_user_details(client, thread):
     """Function to collect niche details."""
-    print("DETAILS", "-" * 23, end="\n")
-    title = f"Title: {get_input('Please type in title: ', lambda: quit_handler(client, thread))}"
-    description = f"Description: {get_input('Please type in description: ', lambda: quit_handler(client, thread))}"
+    print("\nDETAILS (Please provide the following details)")
+    print("-" * 45)
+    title = f"Title: {get_input('Title: (Name of your niche) ', lambda: quit_handler(client, thread))}"
+    description = f"Description: {get_input('Description: (Describe your niche) ', lambda: quit_handler(client, thread))}"
     return f"{title}\n{description}"
 
 
 def display_task_groups(task_groups: dict):
     """Function to display available task groups."""
-    print("\nTASK GROUPS\n" + "-" * 23)
+    print("\nTASK GROUPS (Select a group to proceed)")  
+    print("-" * 35)
     for i, group_name in enumerate(task_groups.keys(), 1):
         print(f"{i}. {group_name}")
         
