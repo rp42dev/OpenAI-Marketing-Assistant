@@ -64,7 +64,9 @@ def correct_responses(client, thread):
     while True:
         user_input = get_input("Would you like to make corrections to the response? (yes/no): ", lambda: quit_handler(client, thread))
         if user_input == 'yes':
-            user_input = get_input("Please type in your corrections: ", lambda: quit_handler(client, thread))
+            user_input = get_input(" | b to go back | Please type in the corrected response: ", lambda: quit_handler(client, thread))
+            if user_input.lower() == 'b':
+                return None
             return user_input
         elif user_input == 'no':
             return False

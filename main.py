@@ -57,7 +57,9 @@ def main():
             while True:
                 # Allow user to correct responses or proceed
                 user_input = correct_responses(client, thread)
-                if user_input:
+                if user_input == None:
+                    break
+                elif user_input:
                     process_message(client, thread, user_input)
                 else:
                     break
