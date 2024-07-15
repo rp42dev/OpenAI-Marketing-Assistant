@@ -1,5 +1,9 @@
 class UserInteraction:
-    """Class to handle user interaction with the OpenAI API."""
+    """
+    Class to handle user interaction with the OpenAI API.
+    Methods: get_input, quit_handler, collect_user_details, display_options, select_option, correct_responses
+    """
+    
     def __init__(self, client, thread):
         self.client = client
         self.thread = thread
@@ -49,12 +53,12 @@ class UserInteraction:
     def correct_responses(self):
         """Function to allow user to correct responses."""
         while True:
-            user_input = self.get_input("Would you like to make corrections to the response? (yes/no): ")
-            if user_input.lower() in ['yes', 'no']:
-                if user_input.lower() == 'yes':
-                    corrected_input = self.get_input('"b" to go back | Please type in the corrected response: ')
-                    if corrected_input.lower() == 'b':
-                        return None
-                    return corrected_input
-                return False
+            user_input = self.get_input('Would you like to make corrections to the response? (yes/no): ')
+            if user_input.lower() == 'yes':
+                corrected_input = self.get_input('"b" to go back | Please type in the corrections you would like to make: ')
+                if corrected_input.lower() == 'b':
+                    return None
+                return corrected_input
+            elif user_input.lower() == 'no':
+                return None
             print("Invalid input. Please try again.")

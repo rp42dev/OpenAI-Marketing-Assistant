@@ -14,9 +14,7 @@ ASSISTANT_ID_TOKEN = os.getenv("ASSISTANT_ID_TOKEN")
 
 
 def get_config():
-    """
-    Get the configuration from the config.json file.
-    """
+    """Get the configuration from the config.json file."""
     with open("config.json") as f:
         return json.load(f)
 
@@ -67,8 +65,8 @@ def main():
                     break
                 elif user_input:
                     process_message(client, thread, user_input)
-                else:
-                    break
+                    process_task(client, thread, "function_groups", "corrections", "1")
+                break
 
 
 if __name__ == "__main__":
