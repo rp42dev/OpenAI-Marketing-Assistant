@@ -44,7 +44,7 @@ def main():
     while True:
         # Display available task groups and select one
         task_groups = client.config["task_groups"]
-        ui.display_options(task_groups, "TASK GROUPS (Please select a task group)", is_task_group=True)
+        ui.display_options(task_groups, "TASK GROUPS (Please select a task group)")
         
         selected_group = ui.select_option(task_groups, "Please type in the task group number")
         if selected_group is None:
@@ -54,7 +54,7 @@ def main():
         while True:
             # Display available tasks within the selected group and select one
             tasks = task_groups[selected_group]
-            ui.display_options(tasks, f"TASKS ({selected_group})", is_task_group=False)
+            ui.display_options(tasks, f"TASKS ({selected_group})")
             
             selected_task = ui.select_option(tasks, "Please type in the task number", back_option=True)
             if selected_task is None:

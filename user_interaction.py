@@ -32,7 +32,7 @@ class UserInteraction:
         description = f"Description: {self.get_input('Description: (Describe your niche) ')}"
         return f"{title}\n{description}"
 
-    def display_options(self, options: dict, title: str, is_task_group: bool):
+    def display_options(self, options: dict, title: str):
         """Function to display available options with a given title."""
         print(f"\n{title}\n" + "-" * len(title))
         for i, option_key in enumerate(options.items(), 1):
