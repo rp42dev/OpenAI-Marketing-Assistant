@@ -47,7 +47,6 @@ def main():
         ui.display_options(task_groups, "TASK GROUPS (Please select a task group)", is_task_group=True)
         
         selected_group = ui.select_option(task_groups, "Please type in the task group number")
-        print(selected_group, "selected_group")
         if selected_group is None:
             print("Exiting...")
             break
@@ -60,7 +59,6 @@ def main():
             selected_task = ui.select_option(tasks, "Please type in the task number", back_option=True)
             if selected_task is None:
                 break
-            print(selected_task, "selected_task")
             processor.process_task("task_groups", selected_group, selected_task)
             
             while True:
