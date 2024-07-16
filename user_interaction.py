@@ -47,7 +47,6 @@ class UserInteraction:
                 return None
             if user_input.isdigit() and 1 <= int(user_input) <= len(options):
                 selected_option = list(options.keys())[int(user_input) - 1]
-                print(f"Selected: {selected_option}")
                 return selected_option
             print("Invalid selection. Please try again.", end="\n")
 
