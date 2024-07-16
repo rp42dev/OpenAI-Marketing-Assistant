@@ -28,19 +28,19 @@ class OpenAIClient:
         return thread
     
     @_handle_api_exceptions
-    def retrieve_thread(self, thread_id):
+    def retrieve_thread(self, thread_id: str):
         """Retrieve a thread with the assistant agent based on the thread ID."""
         thread = self.client.beta.threads.retrieve(thread_id)   
         return thread
     
     @_handle_api_exceptions
-    def delete_thread(self, thread_id):
+    def delete_thread(self, thread_id: str):
         """Delete a thread based on the thread ID."""
         result = self.client.beta.threads.delete(thread_id)
         return result
     
     @_handle_api_exceptions
-    def stream_run(self, thread_id, assistant_id, task_instructions):
+    def stream_run(self, thread_id: str, assistant_id: str, task_instructions: str):
         """Stream the assistant's run process."""
         with self.client.beta.threads.runs.stream(
             thread_id=thread_id, 
@@ -51,13 +51,13 @@ class OpenAIClient:
             stream.until_done()
     
     @_handle_api_exceptions
-    def create_message(self, thread_id, content, role):
+    def create_message(self, thread_id: str, content: str, role: str):
         """Create a new message in the thread with the specified content and role."""
         message = self.client.beta.threads.messages.create(thread_id=thread_id, content=content, role=role)
         return message
     
     @_handle_api_exceptions
-    def retrieve_message(self, thread_id, message_id):
+    def retrieve_message(self, thread_id: str, message_id: str):
         """Retrieve a message based on the thread ID and message ID."""
         messages = self.client.beta.threads.messages.list(
                 thread_id=thread_id, order="asc", after=message_id

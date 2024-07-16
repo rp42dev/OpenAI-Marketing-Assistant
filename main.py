@@ -46,7 +46,7 @@ def main():
         task_groups = client.config["task_groups"]
         ui.display_options(task_groups, "TASK GROUPS (Please select a task group)")
         
-        selected_group = ui.select_option(task_groups, "Please type in the task group number")
+        selected_group = ui.select_option(task_groups, "Please type in the task group number: ")
         if selected_group is None:
             print("Exiting...")
             break
@@ -56,14 +56,14 @@ def main():
             tasks = task_groups[selected_group]
             ui.display_options(tasks, f"TASKS ({selected_group})")
             
-            selected_task = ui.select_option(tasks, "Please type in the task number", back_option=True)
+            selected_task = ui.select_option(tasks, "Please type in the task number: ", back_option=True)
             if selected_task is None:
                 break
             processor.process_task("task_groups", selected_group, selected_task)
             
             while True:
                 # Allow user to correct responses or proceed
-                user_input = ui.correct_responses()
+                user_input = ui.correct_responses(back_option=True)
                 if user_input is None:
                     break
                 elif user_input:
