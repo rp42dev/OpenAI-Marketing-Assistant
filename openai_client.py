@@ -4,12 +4,12 @@ from decorators import _handle_api_exceptions
 
 
 class OpenAIClient:
-    """Client for interacting with OpenAI's GPT API."""
+    """
+    Client for interacting with OpenAI's GPT API.
+    Methods: get_assistant, create_thread, retrieve_thread, delete_thread, stream_run, create_message, retrieve_message
+    """
     def __init__(self, config=None, api_key=None, assistant_id=None):
-        """
-        Initialize the OpenAIClient with the API key from environment variables.
-        Methods: get_assistant, create_thread, retrieve_thread, delete_thread, stream_run, create_message, retrieve_message
-        """
+        """Initialize the OpenAIClient with the API key from environment variables."""
         self.config = config
         self.OPENAI_API_TOKEN = api_key
         self.ASSISTANT_ID_TOKEN = assistant_id
