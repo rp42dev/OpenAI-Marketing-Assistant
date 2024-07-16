@@ -35,8 +35,8 @@ class UserInteraction:
     def display_options(self, options: dict, title: str, is_task_group: bool):
         """Function to display available options with a given title."""
         print(f"\n{title}\n" + "-" * len(title))
-        for i, (option_key, option_details) in enumerate(options.items(), 1):
-            name = option_key if is_task_group else option_details['name']
+        for i, option_key in enumerate(options.items(), 1):
+            name = option_key[0]
             print(f"{i}. {name}")
 
     def select_option(self, options: dict, prompt: str, back_option=False):
@@ -47,6 +47,7 @@ class UserInteraction:
                 return None
             if user_input.isdigit() and 1 <= int(user_input) <= len(options):
                 selected_option = list(options.keys())[int(user_input) - 1]
+                print(f"Selected: {selected_option}")
                 return selected_option
             print("Invalid selection. Please try again.", end="\n")
 
