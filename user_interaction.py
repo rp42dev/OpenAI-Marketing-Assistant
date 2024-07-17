@@ -10,7 +10,7 @@ class UserInteraction:
     def get_input(self, prompt: str, back_option=False):
         """Helper function to get user input and check for 'q' to quit."""
         try:
-            user_input = input(f'\n"q" to quit' + (f' | "b" to go back' if back_option else '') + f' | {prompt}')
+            user_input = input(f'\n"q" to quit' + (f' | "b" to go back' if back_option else '') + f' | {prompt}: ')
         except (KeyboardInterrupt, EOFError):
             self.quit_handler()
         if user_input == 'q':
@@ -29,8 +29,8 @@ class UserInteraction:
         """Function to collect niche details."""
         print("\nDETAILS (Please provide the following details)")
         print("-" * 45)
-        title = f"Title: {self.get_input('Title: (Name of your niche) ')}"
-        description = f"Description: {self.get_input('Description: (Describe your niche) ')}"
+        title = f"Title: {self.get_input('Title: (Name of your niche)')}"
+        description = f"Description: {self.get_input('Description: (Describe your niche)')}"
         return f"{title}\n{description}"
 
     def display_options(self, options: dict, title: str):
@@ -54,9 +54,9 @@ class UserInteraction:
     def correct_responses(self, back_option=False):
         """Function to allow user to correct responses."""
         while True:
-            user_input = self.get_input('Would you like to make corrections to the response? (yes/no): ')
+            user_input = self.get_input('Would you like to make corrections to the response? (yes/no)')
             if user_input.lower() == 'yes':
-                corrected_input = self.get_input('Type in the correction that you would like to make: ', back_option)
+                corrected_input = self.get_input('Type in the correction that you would like to make', back_option)
                 if corrected_input is None:  # Handle 'b' for back option
                     continue
                 return corrected_input

@@ -45,7 +45,7 @@ def main():
         task_groups = client.config["task_groups"]
         interactions.display_options(task_groups, "TASK GROUPS (Please select a task group)")
         
-        selected_group = interactions.select_option(task_groups, "Please type in the task group number: ")
+        selected_group = interactions.select_option(task_groups, "Please type in the task group number")
         if selected_group is None:
             print("Exiting...")
             break
@@ -55,7 +55,7 @@ def main():
             tasks = task_groups[selected_group]
             interactions.display_options(tasks, f"TASKS ({selected_group})")
             
-            selected_task = interactions.select_option(tasks, "Please type in the task number: ", back_option=True)
+            selected_task = interactions.select_option(tasks, "Please type in the task number", back_option=True)
             if selected_task is None:
                 break
             processor.process_task("task_groups", selected_group, selected_task)
