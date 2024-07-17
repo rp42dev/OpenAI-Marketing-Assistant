@@ -5,7 +5,6 @@ from openai_client import OpenAIClient
 from user_interaction import UserInteraction
 from task_processor import MessageProcessor
 
-
 # Load environment variables from .env file
 load_dotenv()
 
@@ -32,21 +31,21 @@ def main():
     thread = client.create_thread()
     
     # Initialize UserInteraction
-    ui = UserInteraction(client, thread)
+    interactions = UserInteraction(client, thread)
     
     # Instantiate the MessageProcessor
     processor = MessageProcessor(client, thread)
     
     # Collect user details and process the initial message
-    user_input = ui.collect_user_details()
+    user_input = interactions.collect_user_details()
     processor.process_message(user_input)
     
     while True:
         # Display available task groups and select one
         task_groups = client.config["task_groups"]
-        ui.display_options(task_groups, "TASK GROUPS (Please select a task group)")
+        interactions.display_options(task_groups, "TASK GROUPS (Please select a task group)")
         
-        selected_group = ui.select_option(task_groups, "Please type in the task group number: ")
+        selected_group = interactions.select_option(task_groups, "Please type in the task group number: ")
         if selected_group is None:
             print("Exiting...")
             break
@@ -54,23 +53,22 @@ def main():
         while True:
             # Display available tasks within the selected group and select one
             tasks = task_groups[selected_group]
-            ui.display_options(tasks, f"TASKS ({selected_group})")
+            interactions.display_options(tasks, f"TASKS ({selected_group})")
             
-            selected_task = ui.select_option(tasks, "Please type in the task number: ", back_option=True)
+            selected_task = interactions.select_option(tasks, "Please type in the task number: ", back_option=True)
             if selected_task is None:
                 break
             processor.process_task("task_groups", selected_group, selected_task)
             
             while True:
                 # Allow user to correct responses or proceed
-                user_input = ui.correct_responses(back_option=True)
+                user_input = interactions.correct_responses(back_option=True)
                 if user_input is None:
                     break
                 elif user_input:
                     processor.process_message(user_input)
                     processor.process_task("function_groups", "corrections", "Task Correction")
                 break
-
 
 if __name__ == "__main__":
     main()
