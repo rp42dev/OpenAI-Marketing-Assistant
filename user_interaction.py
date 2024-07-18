@@ -1,7 +1,7 @@
 class UserInteraction:
     """
     Class to handle user interaction with the OpenAI API.
-    Methods: get_input, quit_handler, collect_user_details, display_options, select_option, correct_responses, process_message, process_task
+    Methods: get_input, quit_handler, collect_user_details, display_options, select_option, correct_responses
     """
     def __init__(self, client, thread):
         self.client = client
@@ -26,7 +26,7 @@ class UserInteraction:
         raise SystemExit
 
     def collect_user_details(self):
-        """Function to collect niche details."""
+        """Method to collect niche details."""
         print("\nDETAILS (Please provide the following details)")
         print("-" * 45)
         title = f"Title: {self.get_input('Title: (Name of your niche)')}"
@@ -34,14 +34,14 @@ class UserInteraction:
         return f"{title}\n{description}"
 
     def display_options(self, options: dict, title: str):
-        """Function to display available options with a given title."""
+        """Method to display available options with a given title."""
         print(f"\n{title}\n" + "-" * len(title))
         for i, option_key in enumerate(options.items(), 1):
             name = option_key[0]
             print(f"{i}. {name}")
 
     def select_option(self, options: dict, prompt: str, back_option=False):
-        """Function to select an option and validate the selection."""
+        """Method to select an option and validate the selection."""
         while True:
             user_input = self.get_input(prompt, back_option)
             if user_input is None:  # Handle 'b' for back option
@@ -52,7 +52,7 @@ class UserInteraction:
             print("Invalid selection. Please try again.", end="\n")
 
     def correct_responses(self, back_option=False):
-        """Function to allow user to correct responses."""
+        """Method to allow user to correct responses."""
         while True:
             user_input = self.get_input('Would you like to make corrections to the response? (yes/no)')
             if user_input.lower() == 'yes':

@@ -23,43 +23,43 @@ def main():
     """Main function to run the chat interaction with the OpenAIClient."""
     # Load configuration
     config = get_config()
-    
+
     # Initialize the OpenAI client
     client = OpenAIClient(config=config, api_key=OPENAI_API_TOKEN, assistant_id=ASSISTANT_ID_TOKEN)
-    
+
     # Create a new thread for the session
     thread = client.create_thread()
-    
+
     # Initialize UserInteraction
     interactions = UserInteraction(client, thread)
-    
+
     # Instantiate the MessageProcessor
     processor = MessageProcessor(client, thread)
-    
+
     # Collect user details and process the initial message
     user_input = interactions.collect_user_details()
     processor.process_message(user_input)
-    
+
     while True:
         # Display available task groups and select one
         task_groups = client.config["task_groups"]
         interactions.display_options(task_groups, "TASK GROUPS (Please select a task group)")
-        
+
         selected_group = interactions.select_option(task_groups, "Please type in the task group number")
         if selected_group is None:
             print("Exiting...")
             break
-        
+
         while True:
             # Display available tasks within the selected group and select one
             tasks = task_groups[selected_group]
             interactions.display_options(tasks, f"TASKS ({selected_group})")
-            
+
             selected_task = interactions.select_option(tasks, "Please type in the task number", back_option=True)
             if selected_task is None:
                 break
             processor.process_task("task_groups", selected_group, selected_task)
-            
+
             while True:
                 # Allow user to correct responses or proceed
                 user_input = interactions.correct_responses(back_option=True)
